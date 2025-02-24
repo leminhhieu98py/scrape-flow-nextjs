@@ -1,3 +1,4 @@
+import BreadcrumbHeader from '@/components/molecules/breadcrumb-header';
 import DesktopSidebar from '@/components/molecules/desktop-sidebar';
 import { Separator } from '@/components/ui/separator';
 import React, { PropsWithChildren } from 'react';
@@ -8,7 +9,7 @@ function DashboardLayout({ children }: PropsWithChildren) {
       <DesktopSidebar />
       <div className="flex flex-col flex-1 min-h-screen">
         <header className="flex items-center justify-between px-6 py-4 h-[50px] container">
-          ScrapeFlow
+          <BreadcrumbHeader />
         </header>
 
         <Separator />
