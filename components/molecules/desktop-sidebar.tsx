@@ -46,7 +46,7 @@ function DesktopSidebar() {
         {routes.map((route, index) => (
           <Link
             key={index}
-            href={route.href}
+            href={`/${route.href}`}
             className={cn(
               '[&:not(:first-child)]:mt-2',
               buttonVariants({
