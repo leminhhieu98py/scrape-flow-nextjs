@@ -1,5 +1,6 @@
 import BreadcrumbHeader from '@/components/molecules/breadcrumb-header';
 import DesktopSidebar from '@/components/molecules/desktop-sidebar';
+import { ThemeModeToggle } from '@/components/molecules/theme-mode-toggle';
 import { Separator } from '@/components/ui/separator';
 import React, { PropsWithChildren } from 'react';
 
@@ -10,6 +11,9 @@ function DashboardLayout({ children }: PropsWithChildren) {
       <div className="flex flex-col flex-1 min-h-screen">
         <header className="flex items-center justify-between px-6 py-4 h-[50px] container">
           <BreadcrumbHeader />
+          <div className="flex gap-1 items-center">
+            <ThemeModeToggle />
+          </div>
         </header>
 
         <Separator />
