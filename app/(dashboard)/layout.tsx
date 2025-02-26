@@ -1,5 +1,5 @@
 import BreadcrumbHeader from '@/components/molecules/breadcrumb-header';
-import DesktopSidebar from '@/components/molecules/desktop-sidebar';
+import DesktopSidebar from '@/components/molecules/sidebar/desktop-sidebar';
 import { ThemeModeToggle } from '@/components/molecules/theme-mode-toggle';
 import { Separator } from '@/components/ui/separator';
 import React, { PropsWithChildren } from 'react';
