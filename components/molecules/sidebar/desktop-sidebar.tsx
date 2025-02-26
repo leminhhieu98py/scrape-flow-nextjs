@@ -8,7 +8,7 @@ function DesktopSidebar() {
         <Logo />
       </div>
       {/* TODO: implement credits later */}
-      <div className="p-2">Credits</div>
+      {/* <div className="p-2">Credits</div> */}
       <div className="flex flex-col p-2">
         <SidebarMenuItems />
       </div>

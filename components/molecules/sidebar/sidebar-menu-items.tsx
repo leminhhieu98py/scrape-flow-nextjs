@@ -6,8 +6,13 @@ import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/button';
 
 import { cn } from '@/lib/utils';
+import { PropsWithChildren } from 'react';
 
-function SidebarMenuItems() {
+interface Props extends PropsWithChildren {
+  onClick?: () => void;
+}
+
+function SidebarMenuItems({ onClick }: Props) {
   const pathName = usePathname();
   const activeRoute =
     routes.find((route) => route.href.length > 0 && pathName.includes(route.href)) || routes[0];
@@ -24,6 +29,7 @@ function SidebarMenuItems() {
               variant: route.href === activeRoute.href ? 'sidebarActiveItem' : 'sidebarItem'
             })
           )}
+          onClick={onClick}
         >
           <route.icon size={20} />
           {route.label}
