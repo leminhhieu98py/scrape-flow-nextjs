@@ -3,6 +3,7 @@ import DesktopSidebar from '@/components/molecules/sidebar/desktop-sidebar';
 import MobileSidebar from '@/components/molecules/sidebar/mobile-sidebar';
 import { ThemeModeToggle } from '@/components/molecules/theme-mode-toggle';
 import { Separator } from '@/components/ui/separator';
+import { SignedIn, UserButton } from '@clerk/nextjs';
 import React, { PropsWithChildren } from 'react';
 
 function DashboardLayout({ children }: PropsWithChildren) {
@@ -14,6 +15,15 @@ function DashboardLayout({ children }: PropsWithChildren) {
           <MobileSidebar />
           <BreadcrumbHeader />
           <div className="flex gap-1 items-center">
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonBox: 'border border-input rounded-md justify-center h-10 w-10'
+                  }
+                }}
+              />
+            </SignedIn>
             <ThemeModeToggle />
           </div>
         </header>
