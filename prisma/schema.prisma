@@ -9,3 +9,22 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+enum Status {
+  DRAFT
+  PUBLISHED
+}
+
+model Workflow {
+  id String @id @default(cuid())
+  userId String
+  name String
+  description String?
+  definition String
+  status Status @default(DRAFT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Validate unique workflow name for 1 user
+  @@unique([name, userId])
+}
