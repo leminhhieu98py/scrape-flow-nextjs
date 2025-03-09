@@ -3,9 +3,10 @@ import { CustomAlert } from '@/components/molecules/custom-alert';
 import EmptyState from '@/components/molecules/empty-state';
 
 async function UserWorkflows() {
-  const additionalText = 'Otis';
   try {
     const workflows = await getWorkflowsByUserId();
+
+    if (!workflows) throw new Error('Invalid workflows: ', workflows);
 
     return <>{workflows.length ? <>Data</> : <EmptyState />}</>;
   } catch (e) {
