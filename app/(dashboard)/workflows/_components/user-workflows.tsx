@@ -1,4 +1,4 @@
-import { getWorkflowsByUserId } from '@/actions/workflows';
+import { getWorkflowsByUserId } from '@/app/(dashboard)/workflows/_actions/workflows';
 import { CustomAlert } from '@/components/molecules/custom-alert';
 import EmptyState from '@/components/molecules/empty-state';
 
