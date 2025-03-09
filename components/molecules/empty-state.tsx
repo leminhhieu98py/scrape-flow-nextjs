@@ -12,7 +12,7 @@ export default function EmptyState({ additionalText, onClick }: EmptyStateProps)
       <div
         className={cn(
           'w-20 h-20 rounded-full bg-secondary flex justify-center items-center',
-          !onClick && 'cursor-pointer'
+          onClick && 'cursor-pointer'
         )}
         onClick={onClick}
       >
