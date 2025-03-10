@@ -1,11 +1,11 @@
 'use client';
 
 import { MenuIcon } from 'lucide-react';
-import Logo from '../logo';
 import SidebarMenuItems from './sidebar-menu-items';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
+import Logo from '@/components/molecules/logo';
 
 function MobileSidebar() {
   const [open, setOpen] = useState(false);

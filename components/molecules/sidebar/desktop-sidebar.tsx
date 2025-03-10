@@ -1,5 +1,5 @@
-import Logo from '../logo';
 import SidebarMenuItems from './sidebar-menu-items';
+import Logo from '@/components/molecules/logo';
 
 function DesktopSidebar() {
   return (
