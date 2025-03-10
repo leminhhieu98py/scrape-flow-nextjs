@@ -1,6 +1,7 @@
 import { getWorkflowsByUserId } from '@/app/(dashboard)/workflows/_actions/workflows';
 import { CustomAlert } from '@/components/molecules/custom-alert';
 import EmptyState from '@/components/molecules/empty-state';
+import CreateEditWorkflowDialog from './create-edit-workflow-dialog';
 
 async function UserWorkflows() {
   try {
@@ -15,7 +16,7 @@ async function UserWorkflows() {
         ) : (
           <EmptyState
             additionalText="Click the button below the create your first workflows"
-            // createText="Create your first workflow"
+            additionalCreateButton={<CreateEditWorkflowDialog />}
           />
         )}
       </>
