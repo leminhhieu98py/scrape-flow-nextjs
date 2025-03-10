@@ -8,7 +8,18 @@ async function UserWorkflows() {
 
     if (!workflows) throw new Error('Invalid workflows: ', workflows);
 
-    return <>{workflows.length ? <>Data</> : <EmptyState />}</>;
+    return (
+      <>
+        {workflows.length ? (
+          <>Data</>
+        ) : (
+          <EmptyState
+            additionalText="Click the button below the create your first workflows"
+            // createText="Create your first workflow"
+          />
+        )}
+      </>
+    );
   } catch (e) {
     console.log(e);
 
