@@ -10,8 +10,16 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Layers2Icon } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { createWorkflowSchema, createWorkflowSchematype } from '../_schema/workflowSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 function CreateEditWorkflowDialog() {
+  const form = useForm<createWorkflowSchematype>({
+    resolver: zodResolver(createWorkflowSchema),
+    defaultValues: {}
+  });
+
   return (
     <Dialog>
       <DialogTrigger asChild className="mt-4">
