@@ -1,26 +1,32 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from 'react';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
 const labelVariants = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-)
+  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 d'
+);
+
+type AdditionProps = { required?: boolean };
 
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
-    VariantProps<typeof labelVariants>
->(({ className, ...props }, ref) => (
-  <LabelPrimitive.Root
-    ref={ref}
-    className={cn(labelVariants(), className)}
-    {...props}
-  />
-))
-Label.displayName = LabelPrimitive.Root.displayName
+    VariantProps<typeof labelVariants> &
+    AdditionProps
+>(({ className, required, ...props }, ref) => (
+  <>
+    <LabelPrimitive.Root ref={ref} className={cn(labelVariants(), className)} {...props}>
+      <span className="relative">
+        {props.children}
+        {required && <span className="text-red-500 absolute -right-3 -top-1">*</span>}
+      </span>
+    </LabelPrimitive.Root>
+  </>
+));
+Label.displayName = LabelPrimitive.Root.displayName;
 
-export { Label }
+export { Label };

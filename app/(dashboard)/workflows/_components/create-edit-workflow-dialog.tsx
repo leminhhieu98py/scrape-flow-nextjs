@@ -1,3 +1,5 @@
+'use client';
+
 import CustomDialogHeader from '@/components/molecules/custom-dialog-header';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,7 +28,7 @@ function CreateEditWorkflowDialog() {
         <Button>Create your first workflow</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
+        <DialogHeader className="border-b-[1px] border-b-muted-foreground">
           <CustomDialogHeader
             icon={Layers2Icon}
             title="Create workflow"
@@ -34,25 +36,24 @@ function CreateEditWorkflowDialog() {
           />
         </DialogHeader>
 
-        {/* TODO: Remove the sample body */}
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+        <div className="flex flex-col gap-8 py-4">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="name" required>
               Name
             </Label>
-            <Input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
+            <Input id="name" />
+            <p className="text-xs text-muted-foreground">Choose a descriptive and unique name</p>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" defaultValue="@peduarte" className="col-span-3" />
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="description">Description</Label>
+            <Input id="description" />
           </div>
         </div>
-        {/* End of the sample body */}
 
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button className="w-full" type="submit">
+            Proceed
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
