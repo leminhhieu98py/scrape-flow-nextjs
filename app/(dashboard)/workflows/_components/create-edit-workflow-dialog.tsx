@@ -30,6 +30,10 @@ function CreateEditWorkflowDialog() {
     defaultValues: {}
   });
 
+  const handleResetForm = () => {
+    form.reset();
+  };
+
   const onSubmit: SubmitHandler<createWorkflowSchematype> = (data) => {
     console.log('data', data);
   };
@@ -39,7 +43,7 @@ function CreateEditWorkflowDialog() {
       <DialogTrigger asChild className="mt-4">
         <Button>Create your first workflow</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]">
+      <DialogContent className="sm:max-w-[450px]" onCloseAutoFocus={handleResetForm}>
         <DialogHeader>
           <CustomDialogHeader
             icon={Layers2Icon}
