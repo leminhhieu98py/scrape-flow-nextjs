@@ -10,17 +10,29 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Layers2Icon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { createWorkflowSchema, createWorkflowSchematype } from '../_schema/workflowSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@/components/ui/form';
 
 function CreateEditWorkflowDialog() {
   const form = useForm<createWorkflowSchematype>({
     resolver: zodResolver(createWorkflowSchema),
     defaultValues: {}
   });
+
+  const onSubmit: SubmitHandler<createWorkflowSchematype> = (data) => {
+    console.log('data', data);
+  };
 
   return (
     <Dialog>
@@ -36,30 +48,55 @@ function CreateEditWorkflowDialog() {
           />
         </DialogHeader>
 
-        <div className="flex flex-col gap-8 py-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="name" required>
-              Name
-            </Label>
-            <Input id="name" />
-            <p className="text-xs text-muted-foreground">Choose a descriptive and unique name</p>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="description">Description</Label>
-            <Input id="description" />
-            <p className="text-xs text-muted-foreground">
-              Provide a brief description of what your workflow does.
-              <br/>
-              This is optional but can help you remember the workflow&apos;s purpose
-            </p>
-          </div>
-        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-8 py-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex flex-col gap-2">
+                      <FormLabel required>Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                    </div>
+                    <FormDescription>Choose a descriptive and unique name</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        <DialogFooter>
-          <Button className="w-full" type="submit">
-            Proceed
-          </Button>
-        </DialogFooter>
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex flex-col gap-2">
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Provide a brief description of what your workflow does.
+                        <br />
+                        This is optional but can help you remember the workflow&apos;s purpose
+                      </FormDescription>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <DialogFooter className="mt-4">
+              <Button className="w-full" type="submit">
+                Proceed
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
