@@ -27,8 +27,8 @@ function CreateEditWorkflowDialog() {
       <DialogTrigger asChild className="mt-4">
         <Button>Create your first workflow</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader className="border-b-[1px] border-b-muted-foreground">
+      <DialogContent className="sm:max-w-[450px]">
+        <DialogHeader>
           <CustomDialogHeader
             icon={Layers2Icon}
             title="Create workflow"
@@ -47,6 +47,11 @@ function CreateEditWorkflowDialog() {
           <div className="flex flex-col gap-2">
             <Label htmlFor="description">Description</Label>
             <Input id="description" />
+            <p className="text-xs text-muted-foreground">
+              Provide a brief description of what your workflow does.
+              <br/>
+              This is optional but can help you remember the workflow&apos;s purpose
+            </p>
           </div>
         </div>
 

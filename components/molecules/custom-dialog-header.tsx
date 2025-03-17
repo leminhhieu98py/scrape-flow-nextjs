@@ -19,14 +19,14 @@ function CustomDialogHeader({
   subTitle,
   iconClassnames,
   titleClassnames,
-  subTitleClassnames
+  subTitleClassnames,
 }: Props) {
   const Icon = icon;
 
   return (
-    <DialogHeader className="py-6">
+    <DialogHeader className="py-2">
       <DialogTitle asChild>
-        <div className="flex flex-col items-center gap-2 mb-2">
+        <div className="flex flex-col items-center gap-2 mb-2 pb-4 border-b-[1px] border-b-input">
           {Icon && <Icon size={30} className={cn('stroke-primary', iconClassnames)} />}
           {title && <p className={cn('text-xl text-primary', titleClassnames)}>{title}</p>}
           {subTitle && (
