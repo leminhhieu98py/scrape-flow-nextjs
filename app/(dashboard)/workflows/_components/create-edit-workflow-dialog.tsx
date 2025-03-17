@@ -10,7 +10,7 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Layers2Icon } from 'lucide-react';
+import { Layers2Icon, Loader2 } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { createWorkflowSchema, createWorkflowSchematype } from '../_schema/workflowSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,6 +23,8 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
+import { useMutation } from '@tanstack/react-query';
+import { createWorkflow } from '../_actions/workflows';
 
 function CreateEditWorkflowDialog() {
   const form = useForm<createWorkflowSchematype>({
@@ -30,12 +32,18 @@ function CreateEditWorkflowDialog() {
     defaultValues: {}
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: createWorkflow,
+    onError: () => {},
+    onSuccess: () => {}
+  });
+
   const handleResetForm = () => {
     form.reset();
   };
 
   const onSubmit: SubmitHandler<createWorkflowSchematype> = (data) => {
-    console.log('data', data);
+    mutate(data);
   };
 
   return (
@@ -95,8 +103,8 @@ function CreateEditWorkflowDialog() {
             </div>
 
             <DialogFooter className="mt-4">
-              <Button className="w-full" type="submit">
-                Proceed
+              <Button className="w-full" type="submit" disabled={isPending}>
+                Proceed {isPending && <Loader2 className="animate-spin" />}
               </Button>
             </DialogFooter>
           </form>

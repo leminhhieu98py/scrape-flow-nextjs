@@ -10,9 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Status {
+enum WorkflowStatus {
   DRAFT
   PUBLISHED
+	@@map("Status")
 }
 
 model Workflow {
@@ -21,7 +22,7 @@ model Workflow {
   name String
   description String?
   definition String
-  status Status @default(DRAFT)
+  status WorkflowStatus @default(DRAFT)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
