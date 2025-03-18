@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTrigger
@@ -25,17 +26,31 @@ import {
 } from '@/components/ui/form';
 import { useMutation } from '@tanstack/react-query';
 import { createWorkflow } from '../_actions/workflows';
+import { toast } from 'sonner';
+import { PropsWithChildren } from 'react';
 
-function CreateEditWorkflowDialog() {
+interface Props extends PropsWithChildren {
+  customCreateText?: string;
+}
+
+function CreateEditWorkflowDialog({ customCreateText }: Props) {
   const form = useForm<createWorkflowSchematype>({
     resolver: zodResolver(createWorkflowSchema),
     defaultValues: {}
   });
 
+  const onError = () => {
+    toast.error('Failed to create workflow', { id: 'create-workflow' });
+  };
+
+  const onSuccess = () => {
+    toast.success('Workflow created', { id: 'create-workflow' });
+  };
+
   const { mutate, isPending } = useMutation({
     mutationFn: createWorkflow,
-    onError: () => {},
-    onSuccess: () => {}
+    onSuccess,
+    onError
   });
 
   const handleResetForm = () => {
@@ -49,9 +64,12 @@ function CreateEditWorkflowDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild className="mt-4">
-        <Button>Create your first workflow</Button>
+        <Button size="sm">
+          {customCreateText ? customCreateText : 'Create your first workflow'}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[450px]" onCloseAutoFocus={handleResetForm}>
+        <DialogDescription className="hidden">Create workflow</DialogDescription>
         <DialogHeader>
           <CustomDialogHeader
             icon={Layers2Icon}
