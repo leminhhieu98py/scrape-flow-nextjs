@@ -52,9 +52,16 @@ const createWorkflow = async (inputData: createWorkflowSchematype) => {
 };
 
 const deleteWorkflow = async (id: WorkflowType['id']) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error(`Not found userId. UserId is: ${userId}`);
+  }
+
   const result = await prisma.workflow.delete({
     where: {
-      id
+      id,
+      userId
     }
   });
 
