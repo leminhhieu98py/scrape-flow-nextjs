@@ -2,17 +2,23 @@ import { getWorkflowsByUserId } from '@/app/(dashboard)/workflows/_actions/workf
 import { CustomAlert } from '@/components/molecules/custom-alert';
 import EmptyState from '@/components/molecules/empty-state';
 import CreateEditWorkflowDialog from './create-edit-workflow-dialog';
+import UserWorkflowCard from './user-workflow-card';
+import type { WorkflowType } from '../_actions/workflows';
 
 async function UserWorkflows() {
   try {
-    const workflows = await getWorkflowsByUserId();
+    const workflows: WorkflowType[] = await getWorkflowsByUserId();
 
     if (!workflows) throw new Error('Invalid workflows: ', workflows);
 
     return (
       <>
         {workflows.length ? (
-          <>Data</>
+          <div className="flex flex-col gap-4 w-full mt-12">
+            {workflows.map((workflow) => (
+              <UserWorkflowCard key={workflow.id} workflow={workflow} />
+            ))}
+          </div>
         ) : (
           <EmptyState
             additionalText="Click the button below the create your first workflows"
