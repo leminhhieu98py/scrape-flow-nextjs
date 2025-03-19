@@ -4,6 +4,7 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { auth } from '@clerk/nextjs/server';
 import { createWorkflowSchematype } from '../_schema/workflowSchema';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
@@ -50,4 +51,18 @@ const createWorkflow = async (inputData: createWorkflowSchematype) => {
   redirect(`/workflows/editor/${result.id}`);
 };
 
-export { getWorkflowsByUserId, createWorkflow };
+const deleteWorkflow = async (id: WorkflowType['id']) => {
+  const result = await prisma.workflow.delete({
+    where: {
+      id
+    }
+  });
+
+  if (!result) {
+    throw new Error('Fail to delete workflow');
+  }
+
+  revalidatePath('/workflows');
+};
+
+export { getWorkflowsByUserId, createWorkflow, deleteWorkflow };
