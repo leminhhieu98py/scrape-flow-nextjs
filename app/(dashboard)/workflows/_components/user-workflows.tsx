@@ -3,11 +3,11 @@ import { CustomAlert } from '@/components/molecules/custom-alert';
 import EmptyState from '@/components/molecules/empty-state';
 import CreateEditWorkflowDialog from './create-edit-workflow-dialog';
 import UserWorkflowCard from './user-workflow-card';
-import type { WorkflowType } from '../_actions/workflows';
+import { Workflow } from '@prisma/client';
 
 async function UserWorkflows() {
   try {
-    const workflows: WorkflowType[] = await getWorkflowsByUserId();
+    const workflows: Workflow[] = await getWorkflowsByUserId();
 
     if (!workflows) throw new Error('Invalid workflows: ', workflows);
 

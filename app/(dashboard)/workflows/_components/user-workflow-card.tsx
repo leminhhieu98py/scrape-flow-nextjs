@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Pencil, Trash, FileText, Loader2Icon } from 'lucide-react';
-import { deleteWorkflow, WorkflowType } from '../_actions/workflows';
+import { deleteWorkflow } from '../_actions/workflows';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Link from 'next/link';
 import { toast } from 'sonner';
@@ -21,8 +21,9 @@ import {
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { Workflow } from '@prisma/client';
 
-export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType }) {
+export default function UserWorkflowCard({ workflow }: { workflow: Workflow }) {
   const [open, setOpen] = useState(false);
   const [confirmText, setConfirmText] = useState('');
 

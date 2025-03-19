@@ -1,6 +1,6 @@
 'use server';
 
-import { Prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient, Workflow } from '@prisma/client';
 import { auth } from '@clerk/nextjs/server';
 import { createWorkflowSchematype } from '../_schema/workflowSchema';
 import { redirect } from 'next/navigation';
@@ -8,9 +8,7 @@ import { revalidatePath } from 'next/cache';
 
 const prisma = new PrismaClient();
 
-export type WorkflowType = Prisma.WorkflowGetPayload<{}>;
-
-const getWorkflowsByUserId = async (): Promise<WorkflowType[]> => {
+const getWorkflowsByUserId = async (): Promise<Workflow[]> => {
   const { userId } = await auth();
 
   if (!userId) {
@@ -51,7 +49,7 @@ const createWorkflow = async (inputData: createWorkflowSchematype) => {
   redirect(`/workflows/editor/${result.id}`);
 };
 
-const deleteWorkflow = async (id: WorkflowType['id']) => {
+const deleteWorkflow = async (id: Workflow['id']) => {
   const { userId } = await auth();
 
   if (!userId) {
