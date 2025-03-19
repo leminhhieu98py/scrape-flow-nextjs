@@ -19,9 +19,11 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import { useState } from 'react';
+import { Input } from '@/components/ui/input';
 
 export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType }) {
   const [open, setOpen] = useState(false);
+  const [confirmText, setConfirmText] = useState('');
 
   const onError = () => {
     toast.error('Failed to delete workflow', { id: 'delete-workflow' });
@@ -83,10 +85,20 @@ export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType 
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Are you sure?</DialogTitle>
-                  <DialogDescription>
-                    Workflow <span className="font-bold">{workflow.name}</span> will be permanently
-                    deleted. This action cannot be undone.
-                  </DialogDescription>
+                  <div className="flex flex-col gap-4 !mt-8">
+                    <DialogDescription>
+                      This workflow will be permanently deleted. This action cannot be undone.
+                      <br />
+                      If you&apos;re sure, enter <span className="font-bold">
+                        {workflow.name}
+                      </span>{' '}
+                      to confirm
+                    </DialogDescription>
+                    <Input
+                      value={confirmText}
+                      onChange={(e) => setConfirmText(e.currentTarget.value)}
+                    />
+                  </div>
                 </DialogHeader>
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setOpen(false)}>
@@ -95,7 +107,7 @@ export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType 
                   <Button
                     variant="destructive"
                     onClick={() => mutate(workflow.id)}
-                    disabled={isPending}
+                    disabled={confirmText !== workflow.name || isPending}
                   >
                     Yes, delete {isPending && <Loader2Icon className="animate-spin" />}
                   </Button>
