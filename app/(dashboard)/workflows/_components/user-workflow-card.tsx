@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Pencil, Trash, FileText, Loader2Icon } from 'lucide-react';
 import { deleteWorkflow, WorkflowType } from '../_actions/workflows';
@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/dialog';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType }) {
   const [open, setOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType 
           </Link>
           <Badge
             variant="secondary"
-            className="bg-yellow-100 dark:bg-yellow-800 text-yellow-700 dark:text-yellow-100 w-fit text-xs font-light hover:bg-yellow-200 dark:hover:bg-yellow-600"
+            className="bg-yellow-100 dark:bg-yellow-800 text-yellow-700 dark:text-yellow-100 w-fit text-xs font-light"
           >
             {workflow.status}
           </Badge>
@@ -67,9 +68,9 @@ export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType 
       <div className="flex items-center gap-1 md:gap-2">
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger className="border rounded-sm p-1.5 md:p-2 bg-background dark:bg-gray-800 hover:bg-accent hover:text-accent-foreground dark:hover:bg-gray-700">
+            <TooltipTrigger className={cn(buttonVariants({ variant: 'outline', size: 'sm' }))}>
               <Link href={`/workflows/editor/${workflow.id}`}>
-                <Pencil className="w-3 h-3 md:w-4 md:h-4 text-gray-600 dark:text-gray-300" />
+                <Pencil />
               </Link>
             </TooltipTrigger>
             <TooltipContent>
@@ -79,8 +80,10 @@ export default function UserWorkflowCard({ workflow }: { workflow: WorkflowType 
           <Tooltip>
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <TooltipTrigger className="border rounded-sm p-1.5 md:p-2 bg-destructive hover:bg-destructive/90 dark:bg-red-700 dark:hover:bg-red-600">
-                  <Trash className="w-3 h-3 md:w-4 md:h-4 text-white dark:text-gray-100" />
+                <TooltipTrigger
+                  className={cn(buttonVariants({ variant: 'destructive', size: 'sm' }))}
+                >
+                  <Trash />
                 </TooltipTrigger>
               </DialogTrigger>
               <DialogContent className="dark:bg-gray-900 dark:border-gray-700">
