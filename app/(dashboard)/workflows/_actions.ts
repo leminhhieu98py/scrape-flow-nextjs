@@ -2,7 +2,7 @@
 
 import { PrismaClient, Workflow } from '@prisma/client';
 import { auth } from '@clerk/nextjs/server';
-import { createWorkflowSchematype } from '../_schema/workflowSchema';
+import { createWorkflowSchematype } from './_schema';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
@@ -46,7 +46,7 @@ const createWorkflow = async (inputData: createWorkflowSchematype) => {
     throw new Error('Fail to create workflow');
   }
 
-  redirect(`/workflows/editor/${result.id}`);
+  redirect(`/workflow/editor/${result.id}`);
 };
 
 const deleteWorkflow = async (id: Workflow['id']) => {

@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Pencil, Trash, FileText, Loader2Icon } from 'lucide-react';
-import { deleteWorkflow } from '../_actions/workflows';
+import { deleteWorkflow } from '../_actions';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Link from 'next/link';
 import { toast } from 'sonner';

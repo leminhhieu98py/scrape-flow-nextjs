@@ -13,7 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Layers2Icon, Loader2 } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { createWorkflowSchema, createWorkflowSchematype } from '../_schema/workflowSchema';
+import { createWorkflowSchema, createWorkflowSchematype } from '../_schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
@@ -25,7 +25,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { useMutation } from '@tanstack/react-query';
-import { createWorkflow } from '../_actions/workflows';
+import { createWorkflow } from '../_actions';
 import { toast } from 'sonner';
 import { PropsWithChildren } from 'react';
 
