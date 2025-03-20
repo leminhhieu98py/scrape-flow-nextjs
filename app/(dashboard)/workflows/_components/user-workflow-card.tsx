@@ -52,7 +52,7 @@ export default function UserWorkflowCard({ workflow }: { workflow: Workflow }) {
 
         <div className="flex flex-col md:flex-row md:items-center gap-1 w-full">
           <Link
-            href={`/workflows/editor/${workflow.id}`}
+            href={`/workflow/editor/${workflow.id}`}
             className="text-sm md:text-base font-medium text-gray-800 dark:text-gray-100 max-w-[300px] md:max-w-[400px] truncate block hover:underline"
           >
             {workflow.name}
@@ -70,7 +70,7 @@ export default function UserWorkflowCard({ workflow }: { workflow: Workflow }) {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger className={cn(buttonVariants({ variant: 'outline', size: 'sm' }))}>
-              <Link href={`/workflows/editor/${workflow.id}`}>
+              <Link href={`/workflow/editor/${workflow.id}`}>
                 <Pencil />
               </Link>
             </TooltipTrigger>
