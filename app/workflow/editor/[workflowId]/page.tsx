@@ -7,6 +7,7 @@ async function WorkflowPage({ params }: { params: { workflowId: string } }) {
   try {
     const workflow = await getWorkflowById(workflowId);
 
+    // TODO: add editor interface here
     return <div>{workflow.name}</div>;
   } catch (e) {
     console.log(e);
