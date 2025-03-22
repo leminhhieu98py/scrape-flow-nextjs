@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getWorkflowById } from './_actions';
+import WorkflowEditor from '../_components/WorkflowEditor';
 
 async function WorkflowPage({ params }: { params: { workflowId: string } }) {
   const { workflowId } = params;
@@ -7,8 +8,11 @@ async function WorkflowPage({ params }: { params: { workflowId: string } }) {
   try {
     const workflow = await getWorkflowById(workflowId);
 
-    // TODO: add editor interface here
-    return <div>{workflow.name}</div>;
+    return (
+      <div>
+        <WorkflowEditor workflow={workflow} />
+      </div>
+    );
   } catch (e) {
     console.log(e);
 
