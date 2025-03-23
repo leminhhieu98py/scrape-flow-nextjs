@@ -5,6 +5,7 @@ interface Props {
 }
 
 function WorkflowEditor({ workflow }: Props) {
+    // TODO: read react flow documents
   return <div>WorkflowEditor: {workflow.name}</div>;
 }
 
