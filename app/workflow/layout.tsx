@@ -6,7 +6,7 @@ import { PropsWithChildren } from 'react';
 function WorkflowLayout({ children }: PropsWithChildren) {
   return (
     <div className="flex flex-col w-full h-screen">
-      {children}
+      <div className="h-full">{children}</div>
       <Separator />
       <footer className="flex items-center justify-between p-2">
         <Logo iconSize={16} fontSize="text-xl" />

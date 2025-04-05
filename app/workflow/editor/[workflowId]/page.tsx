@@ -8,11 +8,7 @@ async function WorkflowPage({ params }: { params: { workflowId: string } }) {
   try {
     const workflow = await getWorkflowById(workflowId);
 
-    return (
-      <div>
-        <WorkflowEditor workflow={workflow} />
-      </div>
-    );
+    return <WorkflowEditor workflow={workflow} />;
   } catch (e) {
     console.log(e);
 
