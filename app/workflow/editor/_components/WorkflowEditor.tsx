@@ -1,6 +1,26 @@
+'use client';
+
 import '@xyflow/react/dist/style.css';
 import { Workflow } from '@prisma/client';
-import { BuiltInNode, Node, ReactFlow, Edge } from '@xyflow/react';
+import {
+  BuiltInNode,
+  Node,
+  ReactFlow,
+  Edge,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  OnConnect,
+  Controls,
+  MiniMap,
+  Background,
+  BackgroundVariant,
+  ReactFlowProvider,
+  Panel,
+  NodeToolbar,
+  Position
+} from '@xyflow/react';
+import { useCallback } from 'react';
 
 interface Props {
   workflow: Workflow;
@@ -23,9 +43,34 @@ const initialNodes: AppNode[] = [
 const initialEdges: Edge[] = [{ id: 'e1-2', source: '1', target: '2' }];
 
 function WorkflowEditor({ workflow }: Props) {
+  const [nodes, _setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const onConnect: OnConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
+  );
+
   return (
     <div className="w-full	h-full">
-      <ReactFlow nodes={initialNodes} edges={initialEdges} />
+      <ReactFlowProvider>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          fitView
+        />
+        <Controls />
+        <MiniMap />
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+        <NodeToolbar isVisible={true} position={Position.Top}>
+          <button>delete</button>
+          <button>copy</button>
+          <button>expand</button>
+        </NodeToolbar>
+      </ReactFlowProvider>
     </div>
   );
 }
