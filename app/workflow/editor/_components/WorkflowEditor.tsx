@@ -61,15 +61,16 @@ function WorkflowEditor({ workflow }: Props) {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           fitView
-        />
-        <Controls />
-        <MiniMap />
-        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        <NodeToolbar isVisible={true} position={Position.Top}>
-          <button>delete</button>
-          <button>copy</button>
-          <button>expand</button>
-        </NodeToolbar>
+        >
+          <Controls position='top-left' />
+          <MiniMap />
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+          <NodeToolbar isVisible={true} position={Position.Top}>
+            <button>delete</button>
+            <button>copy</button>
+            <button>expand</button>
+          </NodeToolbar>
+        </ReactFlow>
       </ReactFlowProvider>
     </div>
   );
